@@ -1,0 +1,31 @@
+{
+    "name": "webpack-template",
+    "version": "0.0.1",
+    "description": "template by mint_stockfish",
+    "keywords": [
+        "webpack",
+        "template"
+    ],
+    "homepage": "https://github.com/MintStockfish/Webpack#readme",
+    "bugs": {
+        "url": "https://github.com/MintStockfish/Webpack/issues"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/MintStockfish/Webpack.git"
+    },
+    "license": "MIT",
+    "author": "Mint_Stockfish",
+    "private": "true",
+    "scripts": {
+        "build": "npx webpack",
+        "start": "node dist/bundle.js"
+    },
+    "devDependencies": {
+        "css-loader": "^7.1.2",
+        "html-webpack-plugin": "^5.6.5",
+        "style-loader": "^4.0.0",
+        "webpack": "^5.104.1",
+        "webpack-cli": "^6.0.1"
+    }
+}
