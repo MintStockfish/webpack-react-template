@@ -18,7 +18,7 @@
     "author": "Mint_Stockfish",
     "private": "true",
     "scripts": {
-        "build": "npx webpack",
+        "build": "webpack",
         "start": "node dist/bundle.js"
     },
     "devDependencies": {

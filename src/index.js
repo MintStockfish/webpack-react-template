@@ -1,3 +1,4 @@
 import "./style.css";
+import { foo } from "./test";
 
-console.log("Webpack project is working perfectly! I hope.");
+foo();
