@@ -14,6 +14,16 @@ module.exports = {
 
     devtool: "inline-source-map",
 
+    devServer: {
+        static: "./dist",
+    },
+
+    optimization: {
+        splitChunks: {
+            chunks: "all",
+        },
+    },
+
     plugins: [
         new HtmlWebpackPlugin({
             title: "Мой крутой проект",
