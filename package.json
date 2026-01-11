@@ -1,5 +1,6 @@
 {
     "name": "webpack-template",
+    "sideEffects": false,
     "version": "0.0.1",
     "description": "template by mint_stockfish",
     "keywords": [
@@ -17,15 +18,20 @@
     "license": "MIT",
     "author": "Mint_Stockfish",
     "private": "true",
+    "type": "module",
     "scripts": {
-        "build": "webpack",
         "start": "webpack serve --open",
-        "watch": "webpack --watch",
-        "analyze": "webpack --env analyze=true"
+        "build": "webpack --env mode=development",
+        "build:prod": "webpack --env mode=production",
+        "analyze": "webpack --env mode=production analyzer=true"
     },
     "devDependencies": {
+        "@babel/core": "^7.28.5",
+        "@babel/preset-env": "^7.28.5",
+        "babel-loader": "^10.0.0",
         "css-loader": "^7.1.2",
         "html-webpack-plugin": "^5.6.5",
+        "mini-css-extract-plugin": "^2.9.4",
         "style-loader": "^4.0.0",
         "webpack": "^5.104.1",
         "webpack-bundle-analyzer": "^5.1.1",

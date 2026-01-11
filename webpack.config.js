@@ -1,90 +1,24 @@
-const path = require("path");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
-const BundleAnalyzerPlugin =
-    require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
+import path from "path";
+import { buildWebpack } from "./webpack/buildWebpack.js";
+import { fileURLToPath } from "url";
 
-const plugins = [
-    new HtmlWebpackPlugin({
-        title: "Мой крутой проект",
-        template: "./src/index.html",
-        favicon: "./src/public/icon.png",
-    }),
-];
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
-if (process.env.ANALYZE) {
-    plugins.push(new BundleAnalyzerPlugin());
-}
-
-module.exports = (env) => {
-    const isAnalyze = env.analyze;
-
-    const plugins = [
-        new HtmlWebpackPlugin({
-            title: "Мой крутой проект",
-            template: "./src/index.html",
-            favicon: "./src/public/icon.png",
-        }),
-    ];
-
-    if (isAnalyze) {
-        plugins.push(new BundleAnalyzerPlugin());
-    }
-
-    return {
-        mode: "development",
-
-        entry: "./src/index.js",
-
-        output: {
-            filename: "bundle.js",
-            path: path.resolve(__dirname, "dist"),
-            clean: true,
-        },
-
-        devtool: "inline-source-map",
-
-        devServer: {
-            static: "./dist",
-            hot: true,
-        },
-
-        optimization: {
-            splitChunks: {
-                chunks: "all",
-            },
-        },
-
-        plugins: plugins,
-
-        module: {
-            rules: [
-                {
-                    test: /\.css$/i,
-                    use: ["style-loader", "css-loader"],
-                },
-                {
-                    test: /\.(png|svg|jpg|jpeg|gif)$/i,
-                    type: "asset/resource",
-                    generator: {
-                        filename: "images/[name]-[hash][ext][query]",
-                    },
-                },
-                {
-                    test: /\.(woff|woff2|eot|ttf|otf)$/i,
-                    type: "asset/resource",
-                    generator: {
-                        filename: "fonts/[name]-[hash][ext][query]",
-                    },
-                },
-                {
-                    test: /\.(csv|tsv)$/i,
-                    use: ["csv-loader"],
-                },
-                {
-                    test: /\.xml$/i,
-                    use: ["xml-loader"],
-                },
-            ],
-        },
+export default (env) => {
+    const paths = {
+        entry: path.resolve(__dirname, "src", "index.js"),
+        output: path.resolve(__dirname, "build"),
+        public: path.resolve(__dirname, "src", "public"),
+        html: path.resolve(__dirname, "src", "index.html"),
+        src: path.resolve(__dirname, "src"),
     };
+
+    const config = buildWebpack({
+        mode: env.mode ?? "development",
+        port: env.port ?? 8080,
+        analyzer: env.analyzer ?? false,
+        paths,
+    });
+    return config;
 };
