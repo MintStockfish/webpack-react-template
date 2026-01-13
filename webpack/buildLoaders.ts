@@ -10,26 +10,21 @@ export function buildLoaders(options: BuildLoadersOptions): LoadersResult {
             type: "asset/resource",
         },
         {
-            test: /\.m?js$/,
+            test: /\.(js|jsx|ts|tsx)$/,
             exclude: /node_modules/,
             use: {
                 loader: "babel-loader",
                 options: {
-                    presets: [["@babel/preset-env", { targets: "defaults" }]],
+                    presets: [
+                        ["@babel/preset-env", { targets: "defaults" }],
+                        ["@babel/preset-react", { runtime: "automatic" }],
+                        "@babel/preset-typescript",
+                    ],
+                    plugins: [
+                        isDev && require.resolve("react-refresh/babel"),
+                    ].filter(Boolean),
                 },
             },
-        },
-        {
-            test: /\.tsx?$/,
-            use: [
-                {
-                    loader: "ts-loader",
-                    options: {
-                        transpileOnly: true,
-                    },
-                },
-            ],
-            exclude: /node_modules/,
         },
     ];
 
@@ -42,6 +37,8 @@ export function buildLoaders(options: BuildLoadersOptions): LoadersResult {
                     loader: "css-loader",
                     options: {
                         modules: {
+                            auto: (resPath: string) =>
+                                Boolean(resPath.includes(".module.")),
                             namedExport: false,
                             localIdentName: "[path][name]__[local]",
                         },
@@ -60,6 +57,8 @@ export function buildLoaders(options: BuildLoadersOptions): LoadersResult {
                     loader: "css-loader",
                     options: {
                         modules: {
+                            auto: (resPath: string) =>
+                                Boolean(resPath.includes(".module.")),
                             namedExport: false,
                             localIdentName: "[hash:base64:8]",
                         },

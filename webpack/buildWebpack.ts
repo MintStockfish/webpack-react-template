@@ -28,13 +28,9 @@ export default function buildWebpack(options: BuildOptions): Configuration {
             rules: buildLoaders(buildOptions),
         },
         resolve: {
-            extensions: [".js", ".ts", ".tsx"],
+            extensions: [".tsx", ".ts", ".jsx", ".js"],
             alias: {
                 "@": paths.src,
-            },
-            extensionAlias: {
-                ".js": [".js", ".ts"],
-                ".jsx": [".jsx", ".tsx"],
             },
         },
         devServer: isDev

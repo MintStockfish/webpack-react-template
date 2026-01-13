@@ -12,7 +12,7 @@ interface EnvParams {
 
 export default (env: EnvParams = {}): Configuration => {
     const paths: BuildOptions["paths"] = {
-        entry: path.resolve(__dirname, "src", "index.ts"),
+        entry: path.resolve(__dirname, "src", "index.tsx"),
         output: path.resolve(__dirname, "dist"),
         public: path.resolve(__dirname, "src", "public"),
         html: path.resolve(__dirname, "src", "index.html"),
