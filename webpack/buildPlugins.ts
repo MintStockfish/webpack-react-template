@@ -2,13 +2,14 @@ import HtmlWebpackPlugin from "html-webpack-plugin";
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
 import path from "path";
 import webpack from "webpack";
+import ForkTsCheckerWebpackPlugin from "fork-ts-checker-webpack-plugin";
 import { BundleAnalyzerPlugin } from "webpack-bundle-analyzer";
+import type { BuildPluginsOptions, PluginsResult } from "./types.js";
 
-export function buildPlugins({ mode, paths, analyzer }) {
-    const isDev = mode === "development";
-    const isProd = mode === "production";
+export function buildPlugins(options: BuildPluginsOptions): PluginsResult {
+    const { mode, paths, analyzer, isDev, isProd } = options;
 
-    const plugins = [
+    const plugins: PluginsResult = [
         new HtmlWebpackPlugin({
             template: paths.html,
             favicon: path.resolve(paths.public, "icon.png"),
@@ -18,6 +19,7 @@ export function buildPlugins({ mode, paths, analyzer }) {
             __IS_PROD__: JSON.stringify(isProd),
             "process.env.NODE_ENV": JSON.stringify(mode),
         }),
+        new ForkTsCheckerWebpackPlugin(),
     ];
 
     if (isDev) {
@@ -25,7 +27,12 @@ export function buildPlugins({ mode, paths, analyzer }) {
     }
 
     if (isProd) {
-        plugins.push(new MiniCssExtractPlugin());
+        plugins.push(
+            new MiniCssExtractPlugin({
+                filename: "css/[name].[contenthash:8].css",
+                chunkFilename: "css/[name].[contenthash:8].css",
+            })
+        );
     }
 
     if (analyzer) {

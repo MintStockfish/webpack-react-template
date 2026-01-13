@@ -1,10 +1,10 @@
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
+import type { BuildLoadersOptions, LoadersResult } from "./types.js";
 
-export function buildLoaders({ mode }) {
-    const isDev = mode === "development";
-    const isProd = mode === "production";
+export function buildLoaders(options: BuildLoadersOptions): LoadersResult {
+    const { isDev, isProd } = options;
 
-    const loaders = [
+    const loaders: LoadersResult = [
         {
             test: /\.(png|jpg|jpeg|gif|svg)$/i,
             type: "asset/resource",
@@ -18,6 +18,18 @@ export function buildLoaders({ mode }) {
                     presets: [["@babel/preset-env", { targets: "defaults" }]],
                 },
             },
+        },
+        {
+            test: /\.tsx?$/,
+            use: [
+                {
+                    loader: "ts-loader",
+                    options: {
+                        transpileOnly: true,
+                    },
+                },
+            ],
+            exclude: /node_modules/,
         },
     ];
 
