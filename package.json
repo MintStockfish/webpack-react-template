@@ -7,14 +7,6 @@
         "webpack",
         "template"
     ],
-    "homepage": "https://github.com/MintStockfish/Webpack#readme",
-    "bugs": {
-        "url": "https://github.com/MintStockfish/Webpack/issues"
-    },
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/MintStockfish/Webpack.git"
-    },
     "license": "MIT",
     "author": "Mint_Stockfish",
     "private": "true",
