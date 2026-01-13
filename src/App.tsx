@@ -1,4 +1,4 @@
-import img from "./public/icon.png";
+import img from './public/icon.png';
 function App() {
     return (
         <>

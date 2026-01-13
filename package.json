@@ -23,7 +23,11 @@
         "start": "npx tsx node_modules/.bin/webpack serve --open",
         "build": "npx tsx node_modules/.bin/webpack --env mode=development",
         "build:prod": "npx tsx node_modules/.bin/webpack --env mode=production",
-        "analyze": "npx tsx node_modules/.bin/webpack --env mode=production analyzer=true"
+        "analyze": "npx tsx node_modules/.bin/webpack --env mode=production analyzer=true",
+        "prepare": "husky",
+        "lint": "eslint src",
+        "lint:fix": "eslint src --fix",
+        "format": "prettier --write src"
     },
     "devDependencies": {
         "@babel/core": "^7.28.5",
@@ -37,14 +41,23 @@
         "@types/webpack-bundle-analyzer": "^4.7.0",
         "babel-loader": "^10.0.0",
         "css-loader": "^7.1.2",
+        "eslint": "^9.39.2",
+        "eslint-config-prettier": "^10.1.8",
+        "eslint-plugin-react": "^7.37.5",
+        "eslint-plugin-react-hooks": "^7.0.1",
         "fork-ts-checker-webpack-plugin": "^9.1.0",
+        "globals": "^17.0.0",
         "html-webpack-plugin": "^5.6.5",
+        "husky": "^9.1.7",
+        "lint-staged": "^16.2.7",
         "mini-css-extract-plugin": "^2.9.4",
+        "prettier": "^3.7.4",
         "react-refresh": "^0.18.0",
         "style-loader": "^4.0.0",
         "ts-loader": "^9.5.4",
         "tsx": "^4.21.0",
         "typescript": "^5.9.3",
+        "typescript-eslint": "^8.53.0",
         "webpack": "^5.104.1",
         "webpack-bundle-analyzer": "^5.1.1",
         "webpack-cli": "^6.0.1",
@@ -53,5 +66,14 @@
     "dependencies": {
         "react": "^19.2.3",
         "react-dom": "^19.2.3"
+    },
+    "lint-staged": {
+        "**/*.{ts,tsx}": [
+            "prettier --write",
+            "eslint --fix"
+        ],
+        "**/*.{json,css,html}": [
+            "prettier --write"
+        ]
     }
 }
