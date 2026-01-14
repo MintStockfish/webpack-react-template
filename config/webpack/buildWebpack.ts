@@ -1,13 +1,13 @@
-import { buildLoaders } from "./buildLoaders.js";
-import { buildPlugins } from "./buildPlugins.js";
-import type { Configuration } from "webpack";
-import type { BuildOptions, BuildWebpackOptions } from "./types.js";
+import { buildLoaders } from './buildLoaders.js';
+import { buildPlugins } from './buildPlugins.js';
+import type { Configuration } from 'webpack';
+import type { BuildOptions, BuildWebpackOptions } from './types.js';
 
 export default function buildWebpack(options: BuildOptions): Configuration {
     const { mode, paths, port } = options;
 
-    const isDev = mode === "development";
-    const isProd = mode === "production";
+    const isDev = mode === 'development';
+    const isProd = mode === 'production';
 
     const buildOptions: BuildWebpackOptions = {
         ...options,
@@ -20,7 +20,7 @@ export default function buildWebpack(options: BuildOptions): Configuration {
         entry: paths.entry,
         output: {
             path: paths.output,
-            filename: "[name].[contenthash].js",
+            filename: '[name].[contenthash].js',
             clean: true,
         },
         plugins: buildPlugins(buildOptions),
@@ -28,9 +28,9 @@ export default function buildWebpack(options: BuildOptions): Configuration {
             rules: buildLoaders(buildOptions),
         },
         resolve: {
-            extensions: [".tsx", ".ts", ".jsx", ".js"],
+            extensions: ['.tsx', '.ts', '.jsx', '.js'],
             alias: {
-                "@": paths.src,
+                '@': paths.src,
             },
         },
         devServer: isDev
@@ -44,10 +44,10 @@ export default function buildWebpack(options: BuildOptions): Configuration {
 
         optimization: {
             splitChunks: {
-                chunks: "all",
+                chunks: 'all',
             },
-            runtimeChunk: "single",
-            moduleIds: "deterministic",
+            runtimeChunk: 'single',
+            moduleIds: 'deterministic',
         },
     };
 }

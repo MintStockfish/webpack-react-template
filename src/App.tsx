@@ -1,8 +1,9 @@
-import img from './public/icon.png';
+import icon from './public/icon.png';
+
 function App() {
     return (
         <>
-            <img src={img} alt="" />
+            <img src={icon} alt="" />
             Hi!
         </>
     );

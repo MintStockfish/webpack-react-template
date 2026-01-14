@@ -3,16 +3,18 @@
         "module": "esnext",
         "moduleResolution": "bundler",
         "target": "esnext",
-        "types": [],
-        "sourceMap": true,
-        "noUncheckedIndexedAccess": true,
-        "exactOptionalPropertyTypes": true,
-        "strict": true,
         "jsx": "react-jsx",
-        "verbatimModuleSyntax": true,
+        "types": ["jest", "node"],
+        "strict": true,
+        "baseUrl": ".",
+        "paths": {
+            "@/*": ["src/*"]
+        },
+        "esModuleInterop": true,
+        "skipLibCheck": true,
         "isolatedModules": true,
-        "noUncheckedSideEffectImports": true,
-        "moduleDetection": "force",
-        "skipLibCheck": true
-    }
+        "verbatimModuleSyntax": true
+    },
+    "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.d.ts", "config/**/*.ts"],
+    "exclude": ["node_modules", "dist"]
 }
