@@ -1,8 +1,8 @@
 import type { Configuration } from 'webpack';
-import type { BuildOptions } from './webpack/types.js';
+import type { BuildOptions } from './types.js';
 import path from 'path';
 
-import buildWebpack from './webpack/buildWebpack.js';
+import buildWebpack from './buildWebpack.js';
 
 interface EnvParams {
     mode?: 'development' | 'production' | 'none';
@@ -11,7 +11,7 @@ interface EnvParams {
 }
 
 export default (env: EnvParams = {}): Configuration => {
-    const rootPath = path.resolve(__dirname, '..');
+    const rootPath = path.resolve(__dirname, '../../');
 
     const paths: BuildOptions['paths'] = {
         entry: path.resolve(rootPath, 'src', 'index.tsx'),
